@@ -1,0 +1,58 @@
+body{
+  background-color: currentColor;
+}
+.nav {
+    justify-content: center;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.loaderRecherche {
+  display: none;
+  left: 64%;
+  position: relative;
+  max-width: fit-content;
+  margin-top:-2%;
+}
+
+.loadingRecherche {
+  border: 2px solid #ccc;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border-top-color: #1ecd97;
+  border-left-color: #1ecd97;
+  animation: spin 1s infinite ease-in;
+}
+
+.loaderSauvegarde {
+  display: none;
+  left: 74%;
+  position: absolute;
+  max-width: fit-content;
+  margin-top:2%;
+}
+
+.loadingSauvegarde {
+  border: 2px solid #ccc;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border-top-color: #1ecd97;
+  border-left-color: #1ecd97;
+  animation: spin 1s infinite ease-in;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

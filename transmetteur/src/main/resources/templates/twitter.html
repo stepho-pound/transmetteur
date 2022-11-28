@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymealf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+     <!-- Favicon -->
+     <link rel="icon" href="https://cdn.radiofrance.fr/s3/cruiser-production/2022/02/6038a30f-fb0e-4750-8c9d-8c0d36ec4f2d/560x315_gettyimages-1303337459.jpg" />
+
+    <!-- CSS Perso -->
+    <link th:href="@{/css/basePage.css}" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Twitter</title>
+  </head>
+  
+<body style="background-color: currentColor;">
+    <div th:replace="/fragments/navbar.html :: navbar"></div>
+
+    <form role="search" style = "max-width: 25%;margin: 0 auto; display: flex;">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <select class="form-control form-control-lg" style="max-width: fit-content;">
+          <option>FR</option>
+          <option>EN</option>
+        </select>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

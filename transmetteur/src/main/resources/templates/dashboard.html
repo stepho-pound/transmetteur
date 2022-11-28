@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymealf.org">
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Favicon -->
+        <link rel="icon" href="https://cdn.radiofrance.fr/s3/cruiser-production/2022/02/6038a30f-fb0e-4750-8c9d-8c0d36ec4f2d/560x315_gettyimages-1303337459.jpg" />
+
+        <!-- CSS Perso -->
+        <link th:href="@{/css/basePage.css}" rel="stylesheet" />
+        <link th:href="@{/css/resultPage.css}" rel="stylesheet" />
+
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+        <title>Dashboard</title>
+    
+    </head>
+    <body style="background-color: currentColor;">
+
+        <!-- Navigation bar -->
+        <div th:replace="/fragments/navbar.html :: navbar"></div>
+
+        <form role="search" style = "max-width: 25%;margin: 0 auto; display: flex;" th:action="@{/dashboard/search}" th:object="${search}">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" th:field="*{query}">
+            <select class="form-control form-control-lg" style="max-width: fit-content;"th:field="*{language}">
+              <option value="FR">FR</option>
+              <option value="EN">EN</option>
+            </select>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        
+        <div class="mainContainer">
+          <tr th:each="news : ${newsList}">
+          
+            <div class="item">
+              <td>
+                <div class="iframeItem" th:data-hover="${news.description}">
+                  <span>
+                    <a th:href="${news.url}">
+                    <img width="450px" height="250px" th:src="${news.urlToImage}"></img>
+                    </a>
+                  </span>
+                </div>
+                <div class="infoItem">
+                <div class="nameItem" th:text="${news.title}"></div>
+                <div class="bottomItem">  
+                  <div class="parutionItem">
+                    <span th:text="${news.source}"></span>
+                    <span class="dateItem"  th:text="${news.publishedAt}"></span>
+                  </div>
+                </div>
+              </div>
+              </td>
+            </div>
+          </tr>
+        </div>
+
+
+          
+        <div class="mainContainer">
+          <tr th:each="video : ${videos}">
+          
+            <div class="item">
+              <td>
+                <div class="iframeItem">
+                  <span>
+                    <iframe width="450px" height="250px" th:src="${video.iframe}"></iframe>
+                  </span>
+                </div>
+                <div class="infoItem">
+                  <div class="nameItem" th:text="${video.name}"></div>
+                  <div class="bottomItem">  
+                    <div class = "parutionItem">
+                      <span type="submit" class="authorItem" th:text="${video.author}"></span>
+                      <span class="dateItem" th:text="${video.datePublication}"></span>
+                    </div>
+                  </div>
+                </div>
+                </td>
+            </div>
+          </tr>
+        </div>
+
+
+
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

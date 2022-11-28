@@ -1,0 +1,21 @@
+<ul th:fragment="dataRecap" id="dataRecapBlock" class="list-group" style = "width: 10%;">
+    <li class="list-group-item d-flex justify-content-between align-items-center" style="font-weight:900;">
+        Mes données
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Total
+        <span class="badge badge-primary badge-pill" th:text="${totalCount}"></span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Vidéo
+      <span class="badge badge-primary badge-pill" th:text="${videoCount}"></span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Article
+      <span class="badge badge-primary badge-pill" th:text="${newsCount}"></span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Dossier
+      <span class="badge badge-primary badge-pill" th:text="${dossierCount}"></span>
+    </li>
+  </ul>

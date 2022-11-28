@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymealf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn.radiofrance.fr/s3/cruiser-production/2022/02/6038a30f-fb0e-4750-8c9d-8c0d36ec4f2d/560x315_gettyimages-1303337459.jpg" />
+
+    <!-- CSS Perso -->
+    <link th:href="@{/css/basePage.css}" rel="stylesheet" />
+    <link th:href="@{/css/resultPage.css}" rel="stylesheet" />
+
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Mon espace</title>
+</head>
+<body style="background-color: currentColor;">
+
+
+<div th:replace="/fragments/navbar.html :: navbar"></div>
+
+   
+<div id="topPage" style = "display: flex; justify-content: space-between;">
+    <button style="height: fit-content;" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Dossiers</button>
+    <div class="dropdown-menu">
+        <!-- gabarits boite sujet , a recopier en modifiant id et for d'input et label -->
+        <button onclick="event.stopPropagation(); bascule('formNouveauDossier');" style="background-color: transparent;" class="btn">Nouveau Dossier</button>
+            <form id="formNouveauDossier" role="search" style = "display:none; max-width: 25%;" th:action="@{/espace/createDossier}" th:object="${newDossier}">
+                <input style="width:unset;" class="form-control me-2" type="search" placeholder="Nom du dossier" aria-label="Nom du dossier" th:field="*{name}">
+                <button class="btn btn-outline-success" type="submit">Créer</button>
+            </form>
+        <!-- fin gabarit sujets -->
+        <tr th:each="dossier : ${dossiers}">
+            <td>
+                <form th:action="@{'/espace/dossier/{id}' (id=${dossier.id})}" th:method="get">
+                    <button style="cursor: pointer; background-color: transparent;" type="submit" class="btn" th:text="${dossier.name}"></button>
+                </form>
+            </td>
+        </tr>
+    </div>
+    
+    <ul th:replace="fragments/espace/dataRecap :: dataRecap" id="dataRecapBlock">
+    </ul>
+</div>
+
+<!--Boutons de tri par date de publi/enregistrement : en attente de responsivité via javascript
+<div id="tri">
+    <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
+    <label style = "width:auto;" class="btn btn-secondary" for="option1">Par date de publication</label>
+
+    <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
+    <label style = "width:auto;" class="btn btn-secondary" for="option2">Par date d'enregistrement</label>
+</div>-->
+
+
+
+<div th:replace="fragments/espace/myNews :: myNews" id="myNewsBlock">
+</div>
+
+<div th:replace="fragments/espace/myVideos :: myVideos" id="myVideosBlock" >
+</div>
+
+<script th:src="@{/jquery/jquery3.6.0.js}"></script>
+<script th:src="@{/js/espace.js}"></script>
+<script th:src="@{/js/dossier.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

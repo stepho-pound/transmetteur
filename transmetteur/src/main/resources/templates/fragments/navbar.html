@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymealf.org">
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- CSS Perso -->
+        <link th:href="@{/css/basePage.css}" rel="stylesheet" />
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+        <title>Navbar</title>
+    
+    </head>
+<body>
+
+<!-- Brand: Direct Child of ".navbar" -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style = "justify-content: espace-between;" th:fragment="navbar">
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-l ink navbar-brand" th:href="@{/}">
+                <img src="https://cdn.radiofrance.fr/s3/cruiser-production/2022/02/6038a30f-fb0e-4750-8c9d-8c0d36ec4f2d/560x315_gettyimages-1303337459.jpg" style="width:64px;"/>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/news}">News</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/youtube}">Youtube</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/twitter}">Twitter</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/espace}">Mon Espace</a>
+        </li>
+    </ul>
+
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

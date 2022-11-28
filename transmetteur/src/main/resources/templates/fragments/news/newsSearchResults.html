@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymealf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+     <!-- Favicon -->
+     <link rel="icon" href="https://cdn.radiofrance.fr/s3/cruiser-production/2022/02/6038a30f-fb0e-4750-8c9d-8c0d36ec4f2d/560x315_gettyimages-1303337459.jpg" />
+
+    <!-- CSS Perso -->
+    <link th:href="@{/css/basePage.css}" rel="stylesheet" />
+    <link th:href="@{/css/resultPage.css}" rel="stylesheet" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Video</title>
+  </head>
+
+  <body style="background-color: currentColor;">
+
+
+<div id="newsResultsBlock" class="mainContainer" th:fragment="newsSearchResults">
+      <tr th:each="news : ${newsList}">
+      
+        <div class="item">
+          <td>
+            <div class="iframeItem" th:data-hover="${news.description}">
+              <span>
+                <a th:href="${news.url}">
+                <img width="450px" height="250px" th:src="${news.urlToImage}"></img>
+                </a>
+              </span>
+            </div>
+            <div class="infoItem">
+            <div class="nameItem" th:text="${news.title}"></div>
+            <div class="bottomItem">  
+              <div class="parutionItem">
+                <span th:text="${news.source}"></span>
+                <span class="dateItem"  th:text="${news.publishedAt}"></span>
+              </div>
+              <div class="buttonItem">
+                <div class="loaderSauvegarde">
+                  <div class="loadingSauvegarde">
+                  </div>
+                </div>
+                <form id="saveNewsForm" th:action="@{/news/saveNews}">
+                  <button style="background: border-box;" class="btn" >
+                    <button onclick="saveNews();" style="background: border-box;" class="btn" type="button" th:attr="publishedAt=${news.publishedAt}, title=${news.title}, author=${news.author},
+                    source=${news.source}, description=${news.description}, url=${news.url}, urlToImage=${news.urlToImage}, content=${news.content}, searchQuery=${news.searchQuery}">
+                    <img height="20px" src="https://cdn-icons-png.flaticon.com/512/25/25398.png">
+                  </button>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          </td>
+        </div>
+      </tr>
+    </div>
+
+    
+
+  <script th:src="@{/jquery/jquery3.6.0.js}"></script>
+  <script th:src="@{/js/searchVideo.js}"></script>
+
+
+<script th:src="@{/js/dossier.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

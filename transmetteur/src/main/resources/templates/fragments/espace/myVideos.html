@@ -1,0 +1,33 @@
+<div class="mainContainer" th:fragment="myVideos" id="myVideosBlock" >
+    <tr th:each="video : ${videoList}">
+
+        <div class="item">
+            <td>
+                <div class="iframeItem">
+            <span>
+              <iframe width="450px" height="250px" th:src="${video.iframe}"></iframe>
+            </span>
+                </div>
+                <div class="infoItem">
+                    <div class="nameItem" th:text="${video.name}"></div>
+                    <div class="bottomItem">
+                        <div class = "parutionItem">
+                            <span th:text="${video.author}"></span>
+                            <span class="dateItem" th:text="${video.datePublication}"></span>
+                        </div>
+                        <div class="buttonItem">
+                            <a th:href="${video.downloadLink}" style="background: border-box;" class="btn"><img height="30px" src="https://cdn-icons-png.flaticon.com/512/724/724933.png"></a>
+                            
+                                <button id="btnAddVideoToDossier" type="button" th:attr="videoId=${video.id}" style="background: border-box;" class="btn" onclick="deleteVideo(); ">
+                                    <img height="30px" src="https://cdn-icons-png.flaticon.com/512/63/63788.png">
+                                </button>
+                                <button id="btnDeleteVideo" type="button" th:attr="videoId=${video.id}" style="background: border-box;" class="btn" onclick="deleteVideo(); ">
+                                    <img height="30px" src="https://cdn-icons-png.flaticon.com/512/39/39220.png">
+                                </button>
+                            </div>
+                    </div>
+                </div>
+            </td>
+        </div>
+    </tr>
+</div>
