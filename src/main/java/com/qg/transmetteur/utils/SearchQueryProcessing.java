@@ -10,23 +10,21 @@ public class SearchQueryProcessing
         String processedQuery="part=snippet";
         if(search.getQuery()!= null)
             processedQuery = processedQuery.concat("&q=" + search.getQuery());
-        if(search.getLanguage()!= null)
-            processedQuery = processedQuery.concat("&language="+search.getLanguage());
+        if(search.getSortBy()!= null)
+            processedQuery = processedQuery.concat("&order="+search.getSortBy());
         if(search.getFrom()!= null)
             processedQuery = processedQuery.concat("&publishedAfter=" + search.getFrom());
         if(search.getTo()!= null)
             processedQuery = processedQuery.concat("&publishedBefore=" + search.getTo());
         if(search.getSortBy()!= null)
             processedQuery = processedQuery.concat("&order=" + search.getSortBy());
-        else
-            processedQuery = processedQuery.concat("&order=" + "date");
         if(search.getResultNumber()!= null)
             processedQuery = processedQuery.concat("&maxResults=" + search.getResultNumber());
         return processedQuery;
     }
 
     public String processNewsQuery(Search search){
-        String processedQuery="q=\""+search.getQuery()+"\"&relevanceLanguage="+search.getLanguage().toLowerCase();
+        String processedQuery="q=\""+search.getQuery()+"\"&language="+search.getLanguage().toLowerCase();
         if(search.getFrom()!= null)
             processedQuery = processedQuery.concat("&from=" + search.getFrom());
         if(search.getTo()!= null)

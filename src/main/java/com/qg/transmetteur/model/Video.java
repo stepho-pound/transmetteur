@@ -56,11 +56,7 @@ public class Video implements Serializable
     @Column(columnDefinition="varchar(1000)")
     public String image;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name="video_dossier",
-            joinColumns = {@JoinColumn(name="video_id")},
-            inverseJoinColumns = { @JoinColumn(name="dossier_id")})
-    public Set<Dossier> dossiers = new HashSet<>();
+    public Boolean ordered =false;
 
     public String dateEnregistrementBrut;
     public String dateEnregistrement;

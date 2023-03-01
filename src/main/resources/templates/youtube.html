@@ -27,9 +27,10 @@
 
   <form id="searchVideoForm" role="search" style = "max-width: 25%;margin: 0 auto; display: flex;" th:action="@{/youtube/search}" th:object="${search}">
     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" th:field="*{query}">
-    <select class="form-control form-control-lg" style="max-width: fit-content;" th:field="*{language}">
-      <option value="FR">FR</option>
-      <option value="EN">EN</option>
+    <select class="form-control form-control-lg" style="max-width: fit-content;" th:field="*{sortBy}">
+      <option value="date">Date</option>
+      <option value="viewCount">Vues</option>
+      <option value="relevance">Pertinence</option>
     </select>
     <button class="btn btn-outline-success" type="submit">Search</button>
   </form>

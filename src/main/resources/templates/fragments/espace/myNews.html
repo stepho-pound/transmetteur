@@ -18,22 +18,16 @@
                             <span class="dateItem"  th:text="${news.publishedAt}"></span>
                         </div>
                         <div class="buttonItem">
-                            <div>
-                            <button id="btnAddNewsToDossier" onclick="event.stopPropagation(); bascule('formNouveauDossier');" type="button" style="background: border-box;" class="btn">
+                            <button id="btnAddNewsToDossier" type="button" data-type="news" th:attr="id=${news.news_id}" style="background: border-box;" class="btn" onclick="displayDossier();">
                                 <img height="30px" src="https://cdn-icons-png.flaticon.com/512/63/63788.png">
                             </button>
-                            <tr th:each="dossier : ${dossiers}">
-                                <td>
-                                    <form id="addNewsToDossierForm" th:action="@{/espace/addNewsInDossier}">
-                                        <button onclick="addNewsToDossier();" style="cursor: pointer; background-color: transparent;" th:attr="dossierId=${dossier.id}, newsId=${news.id}" type="submit" class="btn" th:text="${dossier.name}"></button>
-                                    </form>
-                                </td>
-                            </tr>  
+                            
+                            <div th:replace="/fragments/espace/myDossiers.html :: dossierList">
                             </div>
-                            <button id="btnDeleteNews" type="button" th:attr="newsId=${news.id}" style="background: border-box;" class="btn" onclick="deleteNews(); ">
+
+                            <button id="btnDeleteNews" type="button" th:attr="newsId=${news.news_id}" style="background: border-box;" class="btn" onclick="deleteNews(); ">
                                 <img height="30px" src="https://cdn-icons-png.flaticon.com/512/39/39220.png">
                             </button>
-                            
                         </div>
                     </div>
                 </div>

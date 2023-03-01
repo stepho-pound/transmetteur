@@ -64,3 +64,58 @@ $('#formDeleteDossier').submit(function (e) {
           }
     });
 });
+
+
+function deleteNewsFromDossier() {
+    var dossierId = document.getElementById("dataRecapBlock").getAttribute("dossierid");
+    var newsId = event.target.parentNode.getAttribute("newsId");
+    $.ajax({
+        url :  "/dossier/deleteNewsFromDossier/" + dossierId + "/" + newsId,
+        type : 'DELETE',
+        success : function(xhr) {
+            if ($(xhr).find('.has-error').length) {
+                $('#formDeleteNews').replaceWith(response);
+            }
+            else{
+                $("#myNewsBlock").replaceWith($($.parseHTML(xhr)).get(29))
+                $("#dataRecapBlock").replaceWith($($($($.parseHTML(xhr)).get(25)).html()).get(4))
+
+            }
+        },
+        error: function (xhr) {
+            if(xhr.status == 200){
+                $("#dossierRecapBlock").replaceWith(response);
+
+            }else{
+                alert(xhr.status);
+            }
+          }
+    });
+}
+
+function deleteVideoFromDossier() {
+    var dossierId = document.getElementById("dataRecapBlock").getAttribute("dossierid");
+    var videoId = event.target.parentNode.getAttribute("videoId");
+    $.ajax({
+        url :  "/dossier/deleteVideoFromDossier/" + dossierId + "/" + videoId,
+        type : 'DELETE',
+        success : function(xhr) {
+            if ($(xhr).find('.has-error').length) {
+                $('#formDeleteVideo').replaceWith(response);
+            }
+            else{
+                $("#myVideoBlock").replaceWith($($.parseHTML(xhr)).get(31))
+                $("#dataRecapBlock").replaceWith($($($($.parseHTML(xhr)).get(25)).html()).get(4))
+
+            }
+        },
+        error: function (xhr) {
+            if(xhr.status == 200){
+                $("#dossierRecapBlock").replaceWith(response);
+
+            }else{
+                alert(xhr.status);
+            }
+          }
+    });
+}

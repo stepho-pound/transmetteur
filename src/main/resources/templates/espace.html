@@ -37,7 +37,7 @@
         <!-- fin gabarit sujets -->
         <tr th:each="dossier : ${dossiers}">
             <td>
-                <form th:action="@{'/espace/dossier/{id}' (id=${dossier.id})}" th:method="get">
+                <form th:action="@{'/espace/dossier/{id}' (id=${dossier.dossier_id})}" th:method="get">
                     <button style="cursor: pointer; background-color: transparent;" type="submit" class="btn" th:text="${dossier.name}"></button>
                 </form>
             </td>

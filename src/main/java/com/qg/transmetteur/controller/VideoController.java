@@ -38,7 +38,6 @@ public class VideoController
     public String getVideo(@ModelAttribute Search search, ModelMap modelMap) throws IOException, JSONException, ParseException, NoSuchAlgorithmException, KeyManagementException
     {
         search.setResultNumber("100");
-        search.setSortBy("date");
         //Initialisation des entités Video en récupérant les urls et les dates de publication des resultats de la recherche
         List<Video> videosList = youtubeAPISearch.getIdsFromQuerySearchResults(searchQueryProcessing.processYoutubeQuery(search));
         //Ajout des autres propriétés des entités Video via un appel à un service embeded

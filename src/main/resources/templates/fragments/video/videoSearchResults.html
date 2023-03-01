@@ -38,7 +38,7 @@
             <div class="bottomItem">  
               <div class = "parutionItem">
                 <form id="searchVideoChannelForm" th:action="@{/youtube/searchByChannelId}">
-                  <button onclick="searchByChannel();" type="button" th:attr="channelid=${video.channelId}" class="authorItem" th:text="${video.author}"></button>
+                  <button onclick="searchByChannel();" type="button" th:attr="channelId=${video.channelId}" class="authorItem" th:text="${video.author}"></button>
                 </form>
                 <span class="dateItem" th:text="${video.datePublication}"></span>
               </div>

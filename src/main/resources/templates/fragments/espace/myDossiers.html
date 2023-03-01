@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymealf.org">
+
+<div id="dossierListBlock" style="display: none;"  class="mainContainer" th:fragment="dossierList">
+
+    <tr th:each="dossier : ${dossiers}">
+        <td>
+            <button style="cursor: pointer; background-color: transparent;" th:attr="dossierId=${dossier.dossier_id}" type="submit" class="btn" th:text="${dossier.name}" onclick="addToDossier()"></button>
+        </td>
+    </tr>
+    
+</div>
+
+</html>

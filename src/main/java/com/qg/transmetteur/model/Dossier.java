@@ -20,16 +20,16 @@ import java.util.Set;
 public class Dossier implements Serializable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, updatable = false)
-    public Long id;
+    public Long dossier_id;
 
     private String name;
 
-    @ManyToMany(mappedBy = "dossiers")
+    @ManyToMany
     public Set<Video> videoList = new HashSet<>();
 
-    @ManyToMany(mappedBy = "dossiers")
+    @ManyToMany
     public Set<News> newsList = new HashSet<>();
 
 }

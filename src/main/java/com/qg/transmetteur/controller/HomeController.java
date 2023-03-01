@@ -87,17 +87,13 @@ public class HomeController
         modelMap.put("newDossier", new Dossier());
         return "news";
     }
-    @RequestMapping("/twitter")
-    public String getTwitter() throws IOException
-    {
-        return "twitter";
-    }
+
     @RequestMapping("/espace")
     public String getEspace(ModelMap modelMap) throws IOException
     {
         List<Dossier> dossiers = dossierService.getAllDossier();
-        List<News> myNews = newsService.getAllNews();
-        List<Video> myVideos = videoService.getAllVideos();
+        List<News> myNews = newsService.getNewsByOrdered(false);
+        List<Video> myVideos = videoService.getVideoByOrdered(false);
 
         modelMap.put("videoList", myVideos);
         modelMap.put("newsList", myNews);

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Value;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,7 +19,7 @@ import java.util.Set;
 public class News implements Serializable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, updatable = false)
     public Long news_id;
 
@@ -52,11 +53,7 @@ public class News implements Serializable
     @Column(columnDefinition="varchar(1000)")
     public String content;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name="video_dossier",
-            joinColumns = {@JoinColumn(name="news_id")},
-            inverseJoinColumns = { @JoinColumn(name="dossier_id")})
-    public Set<Dossier> dossiers = new HashSet<>();
+    public Boolean ordered =false;
 
     public String dateEnregistrementBrut;
     public String dateEnregistrement;

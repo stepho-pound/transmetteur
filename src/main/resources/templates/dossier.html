@@ -26,7 +26,7 @@
 <div style = "display: flex; justify-content: space-between; ">
     <div style="display: flex;">
         <a style="height: fit-content; color: white;" href="/espace" type="button" class="btn btn-primary">Retour à Mon Espace</a>
-        <form id="formDeleteDossier" th:action="@{'/dossier/deleteDossier/{id}' (id=${currentDossier.id})}" th:method="delete">
+        <form id="formDeleteDossier" th:action="@{'/dossier/deleteDossier/{id}' (id=${currentDossier.dossier_id})}" th:method="delete">
             <button type="submit"  class="btn btn-primary" style="height: fit-content; color: white;">Supprimer le dossier <span th:text="${currentDossier.name}"></span>
             </button>
         </form>
@@ -35,12 +35,12 @@
         <button onclick="bascule('formModifDossier');" class="btn btn-primary" style="height: fit-content; color: white;">Modifier le nom du dossier</button>
         <form id="formModifDossier" role="search" style = "display:none; max-width: 25%;" th:action="@{/dossier/modifNomDossier}" th:object="${currentDossier}" th:method="put">
             <input style="width:unset;" class="form-control me-2" type="search" placeholder="Nouveau nom du dossier" aria-label="Nouveau nom du dossier" th:field="*{name}" value="Nouveau nom de dossier">                    
-            <input type="hidden" class="form-control me-2" th:field="*{id}">
+            <input type="hidden" class="form-control me-2" th:field="*{dossier_id}">
             <button class="btn btn-outline-success" type="submit">Modifier</button>
         </form>
     </div>
 
-    <ul id="dossierRecapBlock" th:fragment="dossierRecap" class="list-group" style = "width: 10%;">
+    <ul id="dataRecapBlock" th:fragment="dossierRecap" class="list-group" style = "width: 10%;" th:attr="dossierId=${currentDossier.dossier_id}">
             <li class="list-group-item d-flex justify-content-between align-items-center" style="font-weight:900; " th:text="${currentDossier.name}">
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -69,7 +69,7 @@
 
 
 
-<div class="mainContainer">
+<div class="mainContainer" id="myNewsBlock">
     <tr th:each="news : ${newsList}">
 
         <div class="item">
@@ -88,15 +88,10 @@
                             <span th:text="${news.source}"></span>
                             <span class="dateItem"  th:text="${news.publishedAt}"></span>
                         </div>
-                        <div class="buttonItem">
-                            <a style="background: border-box;" class="btn" onClick="return confirm('Voulez vous télecharger cette vidéo ?')">
-                                <img height="30px" src="https://cdn-icons-png.flaticon.com/512/63/63788.png"></a>
-                       
-                            <form th:action="@{'/espace/deleteNews/{id}' (id=${news.id})}" th:method="delete">
-                                <button type="submit"  style="background: border-box;" class="btn" onClick="return confirm('Êtes vous sûr de vouloir supprimer cet article ?')">
+                        <div class="buttonItem">                 
+                                <button id="btnDeleteNews" th:attr="newsId=${news.news_id}" type="submit"  style="background: border-box;" class="btn" onclick="deleteNewsFromDossier();">
                                     <img height="30px" src="https://cdn-icons-png.flaticon.com/512/39/39220.png">
                                 </button>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -105,7 +100,7 @@
     </tr>
 </div>
 
-<div class="mainContainer">
+<div class="mainContainer" id="myVideoBlock">
     <tr th:each="video : ${videoList}">
 
         <div class="item">
@@ -123,15 +118,10 @@
                             <span class="dateItem" th:text="${video.datePublication}"></span>
                         </div>
                         <div class="buttonItem">
-                            <a th:href="${video.downloadLink}" style="background: border-box;" class="btn" onClick="return confirm('Voulez vous télecharger cette vidéo ?')"><img height="30px" src="https://cdn-icons-png.flaticon.com/512/724/724933.png"></a>
-                            <a th:href="${video.downloadLink}" style="background: border-box;" class="btn" onClick="return confirm('Voulez vous télecharger cette vidéo ?')">
-                                <img height="30px" src="https://cdn-icons-png.flaticon.com/512/63/63788.png"></a>
-                       
-                            <form th:action="@{'/espace/deleteVideo/{id}' (id=${video.id})}" th:method="delete">
-                                <button type="submit"  style="background: border-box;" class="btn" onClick="return confirm('Êtes vous sûr de vouloir supprimer cette vidéo ?')">
+                            <a th:href="${video.downloadLink}" style="background: border-box;" class="btn" onClick="return confirm('Voulez vous télecharger cette vidéo ?')"><img height="30px" src="https://cdn-icons-png.flaticon.com/512/724/724933.png"></a>                       
+                                <button id="btnDeleteVideo" th:attr="videoId=${video.video_id}" type="submit"  style="background: border-box;" class="btn" onclick="deleteVideoFromDossier();">
                                     <img height="30px" src="https://cdn-icons-png.flaticon.com/512/39/39220.png">
                                 </button>
-                            </form>
                             </div>
                     </div>
                 </div>
@@ -141,7 +131,7 @@
 </div>
 
 <script th:src="@{/jquery/jquery3.6.0.js}"></script>
-
+<script th:src="@{/js/espace.js}"></script>
 <script th:src="@{/js/dossier.js}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

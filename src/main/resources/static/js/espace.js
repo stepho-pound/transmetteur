@@ -53,32 +53,67 @@ function deleteVideo() {
 
 
 
-function addNewsToDossier() {
-    var jsonData = { 
-        "dossierId" : event.target.parentNode.getAttribute("dossierId"),
-        "newsId" : event.target.parentNode.getAttribute("newsId"),
+function displayDossier() {
 
-        }
-        
-        $.ajax({
-            url :  $('#addNewsToDossierForm').attr('action'),
-            type : 'POST',
-            dataType:"json",
-            data :  jsonData,
-            beforeSend: function () {
-                spinnerSave(true);
-              },
-              complete: function () {
-                spinnerSave(false);
-              },
-            success : function(response) {
-                if ($(response).find('.has-error').length) {
-                    $('#saveNewsForm').replaceWith(response);
-                }
-                else{
-                }
-            },
-            error: function (xhr) {
-              }
-        });
+    let id = event.currentTarget.attributes['id'].nodeValue
+    let cible = document.querySelector("button[id='"+id+"']")
+    if (cible.nextElementSibling.style.display == "none")
+    cible.nextElementSibling.style.display = "grid"; 
+	else	cible.nextElementSibling.style.display = "none"; 
 }
+
+function addToDossier() {
+   
+        
+    let dossierId = event.currentTarget.attributes['dossierid'].nodeValue
+    let elementToAddId = event.currentTarget.parentElement.previousElementSibling.attributes['id'].nodeValue
+    let elementType = event.currentTarget.parentElement.previousElementSibling.attributes['data-type'].nodeValue
+    let url = ''
+
+    if(elementType == 'news'){
+        url = '/espace/addNewsToDossier'
+        var jsonData = { 
+            "newsId" : elementToAddId,
+            "dossierId" : dossierId
+    
+            }
+    }
+    else if (elementType == 'video'){
+        url = '/espace/addVideoToDossier'
+        var jsonData = { 
+            "videoId" : elementToAddId,
+            "dossierId" : dossierId            }
+    }
+    $.ajax({
+        url :  url,
+        type : 'POST',
+        data : jsonData,
+        success : function(xhr) {
+            if ($(xhr).find('.has-error').length) {
+            }
+            else{
+                $("#myVideosBlock").replaceWith($($.parseHTML(xhr)).get(31))
+                $("#myNewsBlock").replaceWith($($.parseHTML(xhr)).get(29))
+                $("#dataRecapBlock").replaceWith($($($($.parseHTML(xhr)).get(25)).html()).get(4))
+
+            }
+        },
+        error: function (xhr) {
+            if(xhr.status == 200){
+                $("#dossierRecapBlock").replaceWith(response);
+
+            }else{
+                alert(xhr.status);
+            }
+          }
+    });
+
+
+
+
+
+
+
+
+}
+

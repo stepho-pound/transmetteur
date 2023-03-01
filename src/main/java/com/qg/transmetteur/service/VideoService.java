@@ -28,6 +28,14 @@ public class VideoService
         return videoRepository.findAll();
     }
 
+    public List<Video> getVideoByOrdered(Boolean ordered){
+        return videoRepository.findByOrdered(ordered);
+    }
+
+    public void orderLabelize(Video video, Boolean action){
+        video.setOrdered(action);
+        videoRepository.save(video);
+    }
     public Video getVideoById(Long id){
         return videoRepository.findById(id).orElseThrow(() -> new VideoNotFoundException("Video by id " + id + " was not found"));
     }
@@ -42,9 +50,6 @@ public class VideoService
         return "All video removed !! ";
     }
 
-    public void addDossierToVideo(Video video, Dossier dossier){
-        video.getDossiers().add(dossier);
-        System.out.println("Dossier " + dossier.getId() + " add to video "+ video.getId() );
-    }
+
 
 }

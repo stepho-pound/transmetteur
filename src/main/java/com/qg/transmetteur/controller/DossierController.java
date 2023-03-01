@@ -30,6 +30,9 @@ public class DossierController
     @Autowired
     VideoService videoService;
 
+    @Autowired
+    EspaceController espaceController;
+
 
 
     @RequestMapping(value = "/deleteDossier/{id}", method = RequestMethod.DELETE)
@@ -48,9 +51,9 @@ public class DossierController
     public String modifyNameDossier(@ModelAttribute Dossier dossierToModify, ModelMap modelMap) throws IOException, JSONException, ParseException
     {
 
-        dossierService.getDossierById(dossierToModify.getId()).setName(dossierToModify.getName());
+        dossierService.getDossierById(dossierToModify.getDossier_id()).setName(dossierToModify.getName());
 
-        Dossier dossier = dossierService.getDossierById(dossierToModify.getId());
+        Dossier dossier = dossierService.getDossierById(dossierToModify.getDossier_id());
         dossierService.saveDossier(dossier);
 
         modelMap.put("currentDossier", dossier);
@@ -62,4 +65,59 @@ public class DossierController
         return "dossier :: dossierRecap";
     }
 
+    @DeleteMapping(value = "/deleteNewsFromDossier/{dossierid}/{newsid}")
+    public String deleteNewsFromDossier(@PathVariable(name = "dossierid") String dossierid, @PathVariable(name = "newsid") String newsid, ModelMap modelMap) throws IOException, JSONException, ParseException
+    {
+        dossierService.deleteNewsFromDossier(dossierService.getDossierById(Long.valueOf(dossierid)), newsService.getNewsById(Long.valueOf(newsid)));
+
+        Dossier dossier = dossierService.getDossierById(Long.valueOf(dossierid));
+
+
+        List<Dossier> dossiers = dossierService.getAllDossier();
+        Set<News> myNews = dossier.getNewsList();
+        Set<Video> myVideos = dossier.getVideoList();
+
+        modelMap.put("videoList", myVideos);
+        modelMap.put("newsList", myNews);
+        modelMap.put("videoCount", myVideos.size());
+        modelMap.put("newsCount", myNews.size());
+        modelMap.put("dossierCount", dossiers.size());
+        modelMap.put("totalCount", myVideos.size() + myNews.size());
+
+
+        modelMap.put("currentDossier", dossier);
+        modelMap.put("modifDossier", new Dossier());
+        modelMap.put("dossiers", dossiers);
+
+        return "dossier";
+
+    }
+
+    @DeleteMapping(value = "/deleteVideoFromDossier/{dossierid}/{videoid}")
+    public String deleteVideoFromDossier(@PathVariable(name = "dossierid") String dossierid, @PathVariable(name = "videoid") String videoid, ModelMap modelMap) throws IOException, JSONException, ParseException
+    {
+        dossierService.deleteVideoFromDossier(dossierService.getDossierById(Long.valueOf(dossierid)), videoService.getVideoById(Long.valueOf(videoid)));
+
+        Dossier dossier = dossierService.getDossierById(Long.valueOf(dossierid));
+
+
+        List<Dossier> dossiers = dossierService.getAllDossier();
+        Set<News> myNews = dossier.getNewsList();
+        Set<Video> myVideos = dossier.getVideoList();
+
+        modelMap.put("videoList", myVideos);
+        modelMap.put("newsList", myNews);
+        modelMap.put("videoCount", myVideos.size());
+        modelMap.put("newsCount", myNews.size());
+        modelMap.put("dossierCount", dossiers.size());
+        modelMap.put("totalCount", myVideos.size() + myNews.size());
+
+
+        modelMap.put("currentDossier", dossier);
+        modelMap.put("modifDossier", new Dossier());
+        modelMap.put("dossiers", dossiers);
+
+        return "dossier";
+
+    }
 }

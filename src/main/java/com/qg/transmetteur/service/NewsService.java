@@ -29,6 +29,15 @@ public class NewsService
         return newsRepository.findAll();
     }
 
+    public List<News> getNewsByOrdered(Boolean ordered){
+        return newsRepository.findByOrdered(ordered);
+    }
+
+    public void orderLabelize(News news, Boolean action){
+        news.setOrdered(action);
+        newsRepository.save(news);
+    }
+
     public void deleteNews(Long id){
         newsRepository.deleteById(id);
         System.out.println("news removed !! " + id);
@@ -39,8 +48,4 @@ public class NewsService
         return "all news removed !! ";
     }
 
-    public void addDossierToNews(News news, Dossier dossier){
-        news.getDossiers().add(dossier);
-        System.out.println("Dossier " + dossier.getId() + " add to news "+ news.getId() );
-    }
 }

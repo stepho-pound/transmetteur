@@ -25,7 +25,8 @@ $('#searchVideoForm').submit(function (e) {
 });
 
 function searchByChannel() {
-    var channelId = event.target.parentNode.getAttribute("channelId");
+    var channelId = event.currentTarget.attributes[3].nodeValue;
+    
 
     $.ajax({
         url :  $('#searchVideoChannelForm').attr('action'),

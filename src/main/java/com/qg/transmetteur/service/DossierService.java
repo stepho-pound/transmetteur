@@ -11,12 +11,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class DossierService
 {
     @Autowired
     private DossierRepository dossierRepository;
+    @Autowired
+    private NewsService newsService;
+    @Autowired
+    private VideoService videoService;
 
     public Dossier saveDossier(Dossier dossier){
         return dossierRepository.save(dossier);
@@ -35,7 +40,7 @@ public class DossierService
     }
     public void deleteDossier(Dossier dossier){
         dossierRepository.delete(dossier);
-        System.out.println("dossier " + dossier.getId() + " removed !! ");
+        System.out.println("dossier " + dossier.getDossier_id() + " removed !! ");
     }
     public String deleteAll(){
         dossierRepository.deleteAll();
@@ -43,13 +48,36 @@ public class DossierService
     }
 
     public void addNewsToDossier(Dossier dossier, News news){
+
+        newsService.orderLabelize(news, true);
         dossier.getNewsList().add(news);
-        System.out.println("News " + news.getId() + " add to dossier "+ dossier.getId() );
+        dossierRepository.save(dossier);
+        System.out.println("News " + news.getNews_id() + " add to dossier "+ dossier.getDossier_id() );
     }
 
     public void addVideoToDossier(Dossier dossier, Video video){
-        dossier.getVideoList().add(video);
-        System.out.println("Video " + video.getId() + " add to dossier "+ dossier.getId() );
 
+        videoService.orderLabelize(video, true);
+        dossier.getVideoList().add(video);
+        dossierRepository.save(dossier);
+        System.out.println("Video " + video.getVideo_id() + " add to dossier "+ dossier.getDossier_id() );
+    }
+
+    public void deleteNewsFromDossier(Dossier dossier, News news){
+        newsService.orderLabelize(news, false);
+        Set<News> newsList = dossier.getNewsList();
+        newsList.remove(news);
+        dossier.setNewsList(newsList);
+        dossierRepository.save(dossier);
+        System.out.println("news " + news.getNews_id() + " from dossier " + dossier.getDossier_id() + " removed !! ");
+    }
+
+    public void deleteVideoFromDossier(Dossier dossier, Video video){
+        videoService.orderLabelize(video, false);
+        Set<Video> videoList = dossier.getVideoList();
+        videoList.remove(video);
+        dossier.setVideoList(videoList);
+        dossierRepository.save(dossier);
+        System.out.println("video " + video.getVideo_id() + " from dossier " + dossier.getDossier_id() + " removed !! ");
     }
 }

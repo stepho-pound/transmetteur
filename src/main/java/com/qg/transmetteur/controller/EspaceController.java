@@ -95,17 +95,17 @@ public class EspaceController
 
 
 
-    @RequestMapping("/addNewsInDossier")
+    @RequestMapping("/addNewsToDossier")
     public String addNewsInDossier(@RequestParam(value="newsId") News news,
                                    @RequestParam(value="dossierId") Dossier dossier,
                                    ModelMap modelMap) throws IOException, JSONException, ParseException
     {
         dossierService.addNewsToDossier(dossier,news);
-        newsService.addDossierToNews(news,dossier);
+        //newsService.addDossierToNews(news,dossier);
 
         List<Dossier> dossiers = dossierService.getAllDossier();
-        List<News> myNews = newsService.getAllNews();
-        List<Video> myVideos = videoService.getAllVideos();
+        List<News> myNews = newsService.getNewsByOrdered(false);
+        List<Video> myVideos = videoService.getVideoByOrdered(false);
 
         modelMap.put("videoList", myVideos);
         modelMap.put("newsList", myNews);
@@ -121,17 +121,16 @@ public class EspaceController
 
         return "espace";
     }
-    @RequestMapping("/addVideoInDossier")
-    public String addVideoInDossier(@RequestParam(value="video") Video video,
-                                   @RequestParam(value="dossier") Dossier dossier,
+    @RequestMapping("/addVideoToDossier")
+    public String addVideoInDossier(@RequestParam(value="videoId") Video video,
+                                   @RequestParam(value="dossierId") Dossier dossier,
                                    ModelMap modelMap) throws IOException, JSONException, ParseException
     {
         dossierService.addVideoToDossier(dossier,video);
-        videoService.addDossierToVideo(video,dossier);
 
         List<Dossier> dossiers = dossierService.getAllDossier();
-        List<News> myNews = newsService.getAllNews();
-        List<Video> myVideos = videoService.getAllVideos();
+        List<News> myNews = newsService.getNewsByOrdered(false);
+        List<Video> myVideos = videoService.getVideoByOrdered(false);
 
         modelMap.put("videoList", myVideos);
         modelMap.put("newsList", myNews);
